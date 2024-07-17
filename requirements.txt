@@ -1,5 +1,5 @@
-Flask==2.0.2
-pickle5
-numpy
-pandas==1.3.3
-scikit-learn
+numpy==1.23.5
+flask==3.0.0
+scikit-learn==1.3.2
+pandas==2.1.1
+
