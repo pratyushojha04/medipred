@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Prediction Result{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <h2>Predicted Disease: {{ disease }}</h2>
+        <h3>Description:</h3>
+        <p>{{ description }}</p>
+        
+        <h3>Precautions:</h3>
+        {% if precautions %}
+            <ul>
+            {% for precaution in precautions[0] %}
+                <li>{{ precaution }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No precautions available.</p>
+        {% endif %}
+        
+        <h3>Medications:</h3>
+        {% if medications %}
+            <ul>
+            {% for medication in medications %}
+                <li>{{ medication }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No medications available.</p>
+        {% endif %}
+        
+        <h3>Workouts:</h3>
+        {% if workouts %}
+            <ul>
+            {% for workout in workouts %}
+                <li>{{ workout }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No workouts available.</p>
+        {% endif %}
+        
+        <h3>Diets:</h3>
+        {% if diets %}
+            <ul>
+            {% for diet in diets %}
+                <li>{{ diet }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No diets available.</p>
+        {% endif %}
+        
+        <a href="/">Back to Home</a>
+    </div>
+{% endblock %}
