@@ -1,4 +1,6 @@
-# medipred
+# medipred link to web app
+
+https://medipred-1.onrender.com
 
 
 # Disease Prediction Web App
