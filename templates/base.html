@@ -24,6 +24,15 @@
         {% block content %}
         {% endblock %}
     </div>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
 
     <footer class="footer">
         <div class="container">

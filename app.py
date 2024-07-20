@@ -1,10 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for,flash
 import pandas as pd
 import numpy as np
 import pickle
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'a2c63b95d9e24d8e7a12c34b45df456f'
 # Load the datasets
 sym_des = pd.read_csv("dataset/symtoms_df.csv")
 precautions = pd.read_csv("dataset/precautions_df.csv")
@@ -73,8 +73,16 @@ def diseases():
 @app.route('/predict', methods=['POST'])
 def predict():
     symptoms = request.form.get('symptoms')
+    if not symptoms:
+        flash('Please enter your symptoms.')
+        return redirect(url_for('symptoms')) 
     user_symptoms = [s.strip() for s in symptoms.split(',')]
     user_symptoms = [symptom.strip("[]' ") for symptom in user_symptoms]
+
+    invalid_symptoms = [s for s in user_symptoms if s not in symptoms_dict]
+    if invalid_symptoms:
+        flash(f'Invalid symptoms: {", ".join(invalid_symptoms)}. Please enter symptoms from the provided list.')
+        return redirect(url_for('symptoms'))
     
     predicted_disease = get_predicted_value(user_symptoms)
     desc, pre, med, die, wrkout = helper(predicted_disease)
